@@ -6,8 +6,8 @@ Gruppen-Repo für das Labor vom 1. Block von W3M20018.1 Data Science & Big Data 
 
 Gruppenmitglieder:
 
-Markus Roselt
-Alexander Froese
-Matthias Wannenwetsch
-Tobias Sattler
-Lars Nebenführ
+Markus Roselt  
+Alexander Froese  
+Matthias Wannenwetsch  
+Tobias Sattler  
+Lars Nebenführ  
