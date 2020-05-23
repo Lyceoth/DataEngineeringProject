@@ -22,7 +22,7 @@ spec:
           args:
             - "-o"
             - "/tmp/data/init.sql" # we are saving downloaded file as init.sql in /tmp/data directory
-            - "https://raw.githubusercontent.com/MarkRoseHN/BigDataTest/master/SoccerDBCreateMySQL_CREATE.SQL"          ######################## to be changed
+            - "https://raw.githubusercontent.com/Lyceoth/DataEngineeringProject/master/Database/01_SoccerDBMySQL_CREATE.SQL"          ######################## to be changed
           volumeMounts:
             - name: data-volume
               mountPath: /tmp/data
@@ -35,7 +35,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: "mysecretpw"
             - name: MYSQL_DATABASE
-              value: "soccerdb"                                                                           # changed
+              value: "SOCCERSTAT"                                                                           # changed
           # Mount the volume that has been populated by the init container
           volumeMounts:
             - name: data-volume

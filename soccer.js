@@ -15,7 +15,7 @@ const dbConfig = {
 	password: 'mysecretpw',
 	host: 'my-soccerapp-mysql-service', 															//changed
 	port: 33060,
-	schema: 'soccerdb'																				//changed
+	schema: 'SOCCERSTAT'																				//changed
 };
 
 async function getMemcachedServersFromDns() {
@@ -48,7 +48,7 @@ async function getFromCache(key) {
 
 //Get data from database																						
 async function getFromDatabase(userid) {
-	let query = 'SELECT birth_date from persons WHERE person_key = "' + userid + '" LIMIT 1'; 					// to be changed
+	let query = 'SELECT birthday from Player WHERE id = "' + userid + '" LIMIT 1'; 					// changed
 	let session = await mysqlx.getSession(dbConfig);
 
 	console.log("Executing query " + query)
@@ -62,9 +62,9 @@ async function getFromDatabase(userid) {
 		return null;
 	}
 }
-																													//changed
+																								// changed				
 function send_response(response, data) {
-	response.send(`<h1>Hello SoccerFriend k8s</h1> 																			
+	response.send(`<h1> Hello Soccer Friend </h1> 																			
 			<ul>
 				<li>Host ${os.hostname()}</li>
 				<li>Date: ${new Date()}</li>

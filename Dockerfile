@@ -1,7 +1,7 @@
 FROM node:slim
 EXPOSE 8080
-WORKDIR /app
-COPY soccer.json /app/
+WORKDIR /soccerapp
+COPY package.json /soccerapp/
 RUN npm install
-COPY soccer.js /app/
+COPY soccer.js /soccerapp/
 CMD node soccer.js
