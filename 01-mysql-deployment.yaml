@@ -1,42 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: mysql-soccerdeployment                                                                                # changed
   labels:
-    app: my-mysql-deployment
+    app: my-mysql-soccerdeployment                                                                            # changed
 spec:
   # A single mysql instance
   replicas: 1
   selector:
     matchLabels:
-      app: my-mysql
+      app: mysoccer-mysql                                                                                     # changed
   template:
     metadata:
       labels:
-        app: my-mysql
+        app: mysoccer-mysql                                                                                   # changed
     spec:
       # Use the init container to download data to the location where the mysql container expects it
       initContainers:
-      -  name: init-container-data-downloader
-         image: curlimages/curl
-         args:
-           - "-o"
-           - "/tmp/data/init.sql" # we are saving downloaded file as init.sql in /tmp/data directory
-           - "https://github.com/MarkRoseHN/BigDataTest/blob/master/SoccerDBCreateMySQL_CREATE.SQL"
-         
-         volumeMounts:
-         - name: data-volume
-           mountPath: /tmp/data
+        - name: init-container-data-downloader
+          image: curlimages/curl
+          args:
+            - "-o"
+            - "/tmp/data/init.sql" # we are saving downloaded file as init.sql in /tmp/data directory
+            - "https://raw.githubusercontent.com/MarkRoseHN/BigDataTest/master/SoccerDBCreateMySQL_CREATE.SQL"          ######################## to be changed
+          volumeMounts:
+            - name: data-volume
+              mountPath: /tmp/data
       # The actual mysql database
       containers:
-        - name: my-mysql
+        - name: mysoccer-mysql                                                                            # changed
           image: mysql
           # Set required environment variables to initialize the container
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "mysecretpw"
             - name: MYSQL_DATABASE
-              value: "SOCCERSTAT"
+              value: "soccerdb"                                                                           # changed
           # Mount the volume that has been populated by the init container
           volumeMounts:
             - name: data-volume
@@ -54,13 +53,13 @@ spec:
               port: 33060
             initialDelaySeconds: 5
             periodSeconds: 10
-       #         resources:
-                 # requests:
-                   # cpu: 1
-                   # memory: "200M"
-                  #limits:
-                   # cpu: 1
-                   # memory: "200M"
+      #          resources:
+      #            requests:
+      #              cpu: 1
+      #              memory: "200M"
+      #            limits:
+      #              cpu: 1
+      #              memory: "200M"
       # Define an empty volume to be shared by the init and mysql container
       volumes:
         - name: data-volume
