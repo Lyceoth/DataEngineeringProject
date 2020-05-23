@@ -1,10 +1,10 @@
 {
-    "name": "soccerjs-app",
+    "name": "nodejs-dokku-app",
     "version": "1.0.0",
     "description": "",
-    "main": "soccer.js",
+    "main": "index.js",
     "scripts": {
-      "start": "node soccer.js"
+      "start": "node index.js"
     },
     "author": "",
     "license": "ISC",
