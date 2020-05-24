@@ -1,46 +1,39 @@
-1. Open Virtual Machine
+1. Open Virtual Machine (bigdata.ova)
 2. Change User to bigdata (pw: bigdata)
-3. Create Folder in home folder
-	name: soccerapp
-	Download the files from git project as zip, unpack and save move to folder
-3. open mate terminal
-4. Insert to terminal preparation kubernetes
-	cd soccerapp							# change directory to folder "soccerapp"
-	sudo bash 
-	minikube delete/minikube stop					#to go to change to root
-	sudo minikube start --driver=none --memory 4096 --cpus 4
-	kubectl version
-	kubectl get nodes -o wide
-	eval $(minikube docker-env) 					# if possible not needed
-5. Insert to terminal for microservice orchestration
-	minikube addons enable ingress
-	eval $(minikube docker-env) # if possible 			# if possible not needed
-	docker build -t my-soccer-web-app .
-	kubectl apply -f 01-mysql-deployment.yaml
-	kubectl apply -f 02-k8s-mysql-service.yaml
-	kubectl apply -f 03-memcached-deployment-and-service.yaml
-	kubectl apply -f 04-app-deployment-service-ingress.yaml
-6. Use app and change details
-	# Check it's running 
-	watch kubectl get all
-	watch kubectl get ingress -o wide
-	curl http://`minikube ip`/person/l.mlb.com-p.7491
-
-	# Scale memcached
-	kubectl scale deployment memcache-deployment --replicas=2 ; watch kubectl get all
-	curl http://`minikube ip`/person/l.mlb.com-p.7491
-
-	# Scale the app
-	kubectl scale deployment my-super-app-deployment --replicas=2 ; watch kubectl get all
-	curl http://`minikube ip`/person/l.mlb.com-p.7491
-
-	# Delete the app
-	kubectl delete deployment/memcache-deployment
-	kubectl delete deployment/my-soccer-app-deployment
-	kubectl delete deployment/mysql-deployment
-	kubectl delete svc/my-soccer-app-service
-	kubectl delete svc/my-memcached-service
-	kubectl delete svc/my-app-mysql-service
-	kubectl delete ingress/my-super-app-ingress
-	watch kubectl get all
+3. Create new directory named soccerapp at home
+4. Pull all files from git to soccerapp directory
+5. Open MATE terminal and enter following commands
+6. Starting the kubernetes minikube cluster
+	sudo bash 							# necessary
+	cd soccerapp							# necessary
+	minikube delete/minikube stop					# optional, in case if any minikube is already running
+	minikube start							# necessary
+	kubectl version							# optional, check
+	kubectl get nodes -o wide					# optional, check
+	eval $(minikube docker-env) 					# optional, if possible (did not worked always)
+7. Starting the microservice orchestration
+	minikube addons enable ingress					# necessary
+	eval $(minikube docker-env)					# optional, if possible (did not worked always)
+	docker build -t my-soccer-web-app .				# necessary
+	kubectl apply -f 01-mysql-deployment.yaml			# necessary
+	kubectl apply -f 02-k8s-mysql-service.yaml			# necessary
+	kubectl apply -f 03-memcached-deployment-and-service.yaml	# necessary
+	kubectl apply -f 04-app-deployment-service-ingress.yaml		# necessary
+8. Scaling microservice orchestration
+	kubectl scale deployment memcache-deployment --replicas=2	# optional, adds additional memcache
+	kubectl scale deployment my-super-app-deployment --replicas=2	# optional
+9. Checking microservice orchestration
+	watch kubectl get all						# optional, check
+	watch kubectl get ingress -o wide				# optional, check
+10. Using the app
+	minikube ip							# necessary, to get the ip of minikube (10.0.2.15)
+	curl http://`minikube ip`/person/7491				# necessary, enter minikube ip instead of placeholder
+11. Deleting the app or parts of it
+	kubectl delete deployment/memcache-deployment			# optional
+	kubectl delete deployment/my-soccer-app-deployment		# optional
+	kubectl delete deployment/mysql-deployment			# optional
+	kubectl delete svc/my-soccer-app-service			# optional
+	kubectl delete svc/my-memcached-service				# optional
+	kubectl delete svc/my-app-mysql-service				# optional
+	kubectl delete ingress/my-super-app-ingress			# optional
 	
