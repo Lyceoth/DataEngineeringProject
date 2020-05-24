@@ -11,8 +11,7 @@ docker run -it --rm -v \					# fixed
 "$PWD/data:/DataProcessing_Python" -v "$PWD/DataProcessing_Python"
  --name=pyspark jupyter/pyspark-notebook spark-submit "/DataProcessing_Python/map-reduce.py" | grep -v INFO 
 
-"$PWD/data:/data" -v "$PWD/04-spark/batch:/src"
- --name=pyspark jupyter/pyspark-notebook spark-submit "/src/word-count-filter.py" | grep -v INFO  
+docker run -it --rm -v "$PWD/data:/data" -v "$PWD/data:/src" --name=pyspark jupyter/pyspark-notebook spark-submit "/src/soccergame.py" | grep -v INFO  
 
 "$PWD/data:/data" -v "$PWD/src" --name=pyspark jupy
 ter/pyspark-notebook spark-submit "/src/word-count.py" | grep -v INFO  
@@ -20,7 +19,12 @@ ter/pyspark-notebook spark-submit "/src/word-count.py" | grep -v INFO
 
 
 
-bash-5.0$ docker run -it --rm -v "$PWD/../data:/data" -v "$PWD:/src" -v "$PWD:/data" --name=pyspark 
-jupyter/pyspark-notebook bash 
+docker run -it --rm -v "$PWD/../data:/data" -v "$PWD:/src" -v "$PWD:/data" --name=pyspark jupyter/pyspark-notebook bash 
 
 spark-submit /data/soccergame.py
+
+
+2nd Try:
+docker run -it --rm -v "$PWD:/data" -v "$PWD:/src" -v "$PWD:/data" --name=pyspark jupyter/pyspark-notebook bash
+
+
