@@ -7,7 +7,7 @@
 	sudo bash 							# necessary
 	cd soccerapp							# necessary
 	minikube delete/minikube stop					# optional, in case if any minikube is already running
-	minikube start							# necessary
+	sudo minikube start --driver=none --memory 4096 --cpus 4	# necessary
 	kubectl version							# optional, check
 	kubectl get nodes -o wide					# optional, check
 	eval $(minikube docker-env) 					# optional, if possible (did not worked always)
