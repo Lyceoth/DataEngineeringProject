@@ -18,7 +18,7 @@ sc = SparkSession.builder.appName('pyspark_soccer_app') \
     .master("local[*]").getOrCreate().sparkContext
 
 # Create an RDD from a text file
-sentences = sc.textFile("/DataProcessing_Python/Text_Fußball.txt")
+sentences = sc.textFile("/data/wm.txt")
 
 # Run flat map, map, and reduceByKey
 words = sentences.flatMap(lambda sentence: sentence.split(" "))
