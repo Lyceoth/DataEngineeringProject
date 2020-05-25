@@ -63,7 +63,8 @@ async function getFromDatabase(userid) {
 }
 
 // changed
-function send_response(response, player, cache_msg) {
+function send_response(response, data, cache_msg) {
+   let player = data.split(",");
    response.send(
       `<!DOCTYPE html>
    <head>
@@ -74,7 +75,7 @@ function send_response(response, player, cache_msg) {
     <style>
         h1 {
             font: bold Verdana, Arial, sans-serif;
-            font-size: 2.5em;
+            font-size: 2em;
             margin: 4%;
             color: white;
             text-shadow: 0.05em 0.05em #333
@@ -85,7 +86,7 @@ function send_response(response, player, cache_msg) {
             background-color: grey;
             color: white;
             text-shadow: 0.05em 0.05em #333;
-            font-size: 1.4em;
+            font-size: 1.2em;
             text-align:center;
         }
         button {
@@ -98,7 +99,7 @@ function send_response(response, player, cache_msg) {
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 1.5em;
+        font-size: 1.2em;
         width: 10em;
         cursor: pointer;
         margin: 4% 2%;
@@ -114,7 +115,7 @@ function send_response(response, player, cache_msg) {
             transform: translateY(0.1em);
         }
         #data {
-            width: 10em;
+            width: 15em;
             margin:auto;
             text-align:left;
         }
@@ -128,6 +129,7 @@ function send_response(response, player, cache_msg) {
         <li>Memcached Servers: ${memcachedServers}</li>
         <li>Cache Status: ${cache_msg}</li>
         <li>Result is: ${player[1]}</li>
+        <li>Result is: ${data}</li>
     </ul>
     <button>
         Previous
@@ -157,10 +159,9 @@ app.getAsync("/person/:id", async function (request, response) {
       console.log(`Cache miss for key=${key}, querying database`);
       let data = await getFromDatabase(userid);
       if (data) {
-         let player = data.split(",");
          console.log(`Got data=${data}, storing in cache`);
-         if (memcached) await memcached.set(key, player, 30 /* seconds */);
-         send_response(response, player, "Cache Miss");
+         if (memcached) await memcached.set(key, data, 30 /* seconds */);
+         send_response(response, data, "Cache Miss");
       } else {
          send_response(response, "No data found", "No data found");
       }
