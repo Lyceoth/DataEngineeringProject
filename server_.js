@@ -63,7 +63,7 @@ async function getFromDatabase(userid) {
 }
 
 // changed
-function send_response(response, data) {
+function send_response(response, player, cache_msg) {
    response.send(
       `<!DOCTYPE html>
    <head>
@@ -121,12 +121,13 @@ function send_response(response, data) {
     </style>
    </head>
    <body>
-    <h1>Soccer-Star: ${data}</h1>
+    <h1>Soccer-Star: ${player[0]}</h1>
     <ul id="data">
         <li>Host ${os.hostname()}</li>
         <li>Date: ${new Date()}</li>
         <li>Memcached Servers: ${memcachedServers}</li>
-        <li>Result is: ${data}</li>
+        <li>Cache Status: ${cache_msg}</li>
+        <li>Result is: ${player[1]}</li>
     </ul>
     <button>
         Previous
@@ -151,16 +152,17 @@ app.getAsync("/person/:id", async function (request, response) {
 
    if (cachedata) {
       console.log(`Cache hit for key=${key}, cachedata = ${cachedata}`);
-      send_response(response, cachedata + " (cache hit)");
+      send_response(response, cachedata, "Cache Hit");
    } else {
       console.log(`Cache miss for key=${key}, querying database`);
       let data = await getFromDatabase(userid);
       if (data) {
+         let player = data.split(",");
          console.log(`Got data=${data}, storing in cache`);
-         if (memcached) await memcached.set(key, data, 30 /* seconds */);
-         send_response(response, data + " (cache miss)");
+         if (memcached) await memcached.set(key, player, 30 /* seconds */);
+         send_response(response, player, "Cache Miss");
       } else {
-         send_response(response, "No data found");
+         send_response(response, "No data found", "No data found");
       }
    }
 });
