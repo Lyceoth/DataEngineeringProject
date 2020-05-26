@@ -47,12 +47,12 @@ async function getFromCache(key) {
 
 //Get data from database
 async function getFromDatabase(userid) {
-   let query = 'SELECT birthday, player_name from Player WHERE id = "' + userid + '" LIMIT 1';
+   let query = 'SELECT * from Player WHERE id = "' + userid + '" LIMIT 1';
    let session = await mysqlx.getSession(dbConfig);
 
    console.log("Executing query " + query);
    let res = await session.sql(query).execute();
-   let row = res.fetchOne();
+   let row = res.fetchAll();
 
    if (row) {
       console.log("Query result = ", row);
@@ -64,7 +64,6 @@ async function getFromDatabase(userid) {
 
 // changed
 function send_response(response, data, cache_msg) {
-   let player = data.split(",");
    response.send(
       `<!DOCTYPE html>
    <head>
@@ -115,21 +114,30 @@ function send_response(response, data, cache_msg) {
             transform: translateY(0.1em);
         }
         #data {
-            width: 15em;
+            width: 20em;
             margin:auto;
             text-align:left;
         }
     </style>
    </head>
    <body>
-    <h1>Soccer-Star: ${player[0]}</h1>
+    <h1>Soccer-Star: ${data[2]}</h1>
     <ul id="data">
-        <li>Host ${os.hostname()}</li>
+        <li>Host: ${os.hostname()}</li>
         <li>Date: ${new Date()}</li>
         <li>Memcached Servers: ${memcachedServers}</li>
         <li>Cache Status: ${cache_msg}</li>
-        <li>Result is: ${player[1]}</li>
-        <li>Result is: ${data}</li>
+        <br>
+        <li>Player Stats</li>
+        <li>ID: ${data[0]}</li>
+        <li>API ID: ${data[1]}</li>
+        <li>NAME: ${data[2]}</li>
+        <li>FIFA ID: ${data[3]}</li>
+        <li>BIRTHDAY: ${data[4]}</li>
+        <li>HEIGHT: ${data[5]}</li>
+        <li>WIDTH: ${data[6]}</li>
+        <br>
+        <li>Total Data: ${data}</li>
     </ul>
     <button>
         Previous
