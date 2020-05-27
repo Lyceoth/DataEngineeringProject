@@ -135,7 +135,7 @@ function send_response(response, data, cache_msg) {
         <li>FIFA ID: ${data[3]}</li>
         <li>BIRTHDAY: ${data[4]}</li>
         <li>HEIGHT: ${data[5]}</li>
-        <li>WIDTH: ${data[6]}</li>
+        <li>WEIGHT: ${data[6]}</li>
         <br>
         <li>Total Data: ${data}</li>
     </ul>
