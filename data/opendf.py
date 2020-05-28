@@ -41,3 +41,6 @@ df.show()
 
 # Print the schema in a tree format
 df.printSchema()
+
+# Terminal input:
+# /usr/local/bin/spark-submit --jars /home/bigdata/soccerapp/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar opendf.py
