@@ -43,4 +43,6 @@ df.show()
 df.printSchema()
 
 # Terminal input:
+docker run -it --rm -v "$PWD/data:/data" --name=pyspark jupyter/pyspark-notebook spark-submit /data/opendf.py
+
 # /usr/local/bin/spark-submit --jars /home/bigdata/soccerapp/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar opendf.py
