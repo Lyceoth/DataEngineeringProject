@@ -36,6 +36,12 @@ jdbc_url = "jdbc:mysql://{0}:{1}/{2}?user={3}&password={4}".format(hostname,jdbc
 query = "(select * from Player) t1_alias"
 df = sqlContext.read.format('jdbc').options(driver = 'com.mysql.jdbc.Driver',url=jdbc_url, dbtable=query ).load()
 
+#jdbcDF = spark.read.format("jdbc") \
+#    .option("", "jdbc:postgresql:dbserver") \
+#    .option("dbtable", "SOCCERSTAT") \
+#    .option("user", "root").option("password", "mysecretpw") \
+#    .load()
+
 # Displays the content of the DataFrame to stdout
 df.show()
 
@@ -43,6 +49,6 @@ df.show()
 df.printSchema()
 
 # Terminal input:
-docker run -it --rm -v "$PWD/data:/data" --name=pyspark jupyter/pyspark-notebook spark-submit /data/opendf.py
+# docker run -it --rm -v "$PWD/data:/data" --name=pyspark jupyter/pyspark-notebook spark-submit /data/opendf.py
 
 # /usr/local/bin/spark-submit --jars /home/bigdata/soccerapp/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar opendf.py
