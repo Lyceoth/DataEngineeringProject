@@ -16,10 +16,13 @@ spark = SparkContext("local[*]", "SQL_Soccer")
 sc = SQLContext(spark)
 
 # The following creates a DataFrame based on the content of a database table
-prop=new java.util.Properties()
-prop.put("user","root")
-prop.put("password","mysecretpw")
-url="jdbc:mysql://host:3306/SOCCERSTAT"
+jdbcDF = spark.read
+  .format("jdbc")
+  .option("url", "jdbc:mysql:dbserver")
+  .option("dbtable", "schema.tablename")
+  .option("user", "username")
+  .option("password", "password")
+  .load()
 
 val df=spark.read.jdbc(url,"Player",prop) 
 
