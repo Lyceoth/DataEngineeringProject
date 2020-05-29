@@ -16,7 +16,7 @@ spark = SparkContext("local[*]", "SQL_Soccer")
 sc = SQLContext(spark)
 
 # The following creates a DataFrame based on the content of a database table
-soccer_df = sqlContext.read.format("jdbc").options(
+soccer_df = SQLContext.read.format("jdbc").options(
     url="jdbc:mysql://localhost:3306/SOCCERSTAT",
     driver = "com.mysql.jdbc.Driver",
     dbtable = "Player",
