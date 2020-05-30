@@ -31,8 +31,5 @@ soccer_df = SQLContext.read.format("jdbc").options(
 df.show()
 
 # Print the schema in a tree format
-<<<<<<< HEAD
 df.printSchema()
-=======
 soccer_df.printSchema()
->>>>>>> 1819766e7a27c17a51ed3f6a0bb55b5f0cfd20e5

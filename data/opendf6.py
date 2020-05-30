@@ -16,13 +16,16 @@ spark = SparkContext("local[*]", "SQL_Soccer")
 sc = SQLContext(spark)
 
 # The following creates a DataFrame based on the content of a database table
-df = spark.read\
-  .format("jdbc")\
-  .option("jdbc:mysql://10.100.157.209:3306", "jdbc:mysql:dbserver")\
-  .option("dbtable", "SOCCERSTAT")\
-  .option("user", "root")\
-  .option("password", "pysecretpw")\
+sql="""select * from db.Player where id>100"""
+jdbcDF = spark.read
+  .format("jdbc")
+  .option("url", "jdbc:mysql:dbserver")
+  .option("dbtable",  s"( $sql ) t")
+  .option("user", "username")
+  .option("password", "password")
   .load()
+
+val df=spark.read.jdbc(url,"Player",prop) 
 
 # Displays the content of the DataFrame to stdout
 df.show()
