@@ -25,7 +25,7 @@ sc = SQLContext(spark)
 #sqlContext = SQLContext(sc)
 
 #Provide your Spark-master node below
-hostname = "10.100.157.209" 
+hostname = "10.107.120.235" 
 dbname = "SOCCERSTAT"
 jdbcPort = 3306
 username = "root"
@@ -34,7 +34,7 @@ jdbc_url = "jdbc:mysql://{0}:{1}/{2}?user={3}&password={4}".format(hostname,jdbc
 
 
 # The following creates a DataFrame based on the content of a JSON file
-query = "(select * from Player) t1_alias"
+query = "(select * from Player)"
 df = SQLContext.read.format('jdbc').options(driver = 'com.mysql.jdbc.Driver',url=jdbc_url, dbtable=query ).load()
 
 #jdbcDF = spark.read.format("jdbc") \

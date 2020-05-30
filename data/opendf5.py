@@ -18,8 +18,8 @@ sc = SQLContext(spark)
 # The following creates a DataFrame based on the content of a database table
 df = spark.read\
   .format("jdbc")\
-  .option("jdbc:mysql://10.100.157.209:3306", "jdbc:mysql:dbserver")\
-  .option("dbtable", "SOCCERSTAT")\
+  .option("jdbc:mysql://10.107.120.235:3306/SOCCERSTAT", "jdbc:mysql:dbserver")\
+  .option("dbtable", "Player")\
   .option("user", "root")\
   .option("password", "pysecretpw")\
   .load()

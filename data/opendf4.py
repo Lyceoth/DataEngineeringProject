@@ -18,13 +18,11 @@ sc = SQLContext(spark)
 # The following creates a DataFrame based on the content of a database table
 jdbcDF = spark.read
   .format("jdbc")
-  .option("url", "jdbc:mysql:dbserver")
-  .option("dbtable", "schema.tablename")
-  .option("user", "username")
-  .option("password", "password")
+  .option("jdbc:mysql://10.107.120.235:3306/SOCCERSTAT", "jdbc:mysql:dbserver")
+  .option("dbtable", "Player")
+  .option("user", "root")
+  .option("password", "mysecretpw")
   .load()
-
-val df=spark.read.jdbc(url,"Player",prop) 
 
 # Displays the content of the DataFrame to stdout
 df.show()
