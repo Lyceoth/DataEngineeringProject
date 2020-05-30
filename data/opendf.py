@@ -35,13 +35,15 @@ jdbc_url = "jdbc:mysql://{0}:{1}/{2}?user={3}&password={4}".format(hostname,jdbc
 
 # The following creates a DataFrame based on the content of a JSON file
 query = "(select * from Player)"
-df = SQLContext.read.format('jdbc').options(driver = 'com.mysql.jdbc.Driver',url=jdbc_url, dbtable=query ).load()
+df = SQLContext.read.format("jdbc").options(driver = "com.mysql.jdbc.Driver",url=jdbc_url, dbtable=query ).load()
 
+# Script Vergleich:
 #jdbcDF = spark.read.format("jdbc") \
-#    .option("", "jdbc:postgresql:dbserver") \
-#    .option("dbtable", "SOCCERSTAT") \
-#    .option("user", "root").option("password", "mysecretpw") \
-#    .load()
+ #   .option("url", "jdbc:postgresql:dbserver") \
+  #  .option("dbtable", "schema.tablename") \
+   # .option("user", "username").option("password", "password") \
+    #.load()
+
 
 # Displays the content of the DataFrame to stdout
 df.show()
@@ -49,8 +51,8 @@ df.show()
 # Print the schema in a tree format
 df.printSchema()
 
-# Terminal input:
-# docker run -it --rm -v "$PWD/data:/data" --name=pyspark jupyter/pyspark-notebook spark-submit /data/opendf.py
+# Terminal input scenarios:
+# docker run -it --rm -v "$PWD/data:/data" --name=pyspark jupyter/pyspark-notebook spark-submit /data/opendf.py - running!
 
 # docker run -it --rm -v "$PWD/data:/data" --name=pyspark jupyter/pyspark-notebook spark-submit --jars /home/bigdata/soccerapp/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar opendf.py
 

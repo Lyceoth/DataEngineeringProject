@@ -16,13 +16,7 @@ spark = SparkContext("local[*]", "SQL_Soccer")
 sc = SQLContext(spark)
 
 # The following creates a DataFrame based on the content of a database table
-jdbcDF = spark.read
-  .format("jdbc")
-  .option("jdbc:mysql://10.107.120.235:3306/SOCCERSTAT", "jdbc:mysql:dbserver")
-  .option("dbtable", "Player")
-  .option("user", "root")
-  .option("password", "mysecretpw")
-  .load()
+jdbcDF = spark.read.format("jdbc").option("jdbc:mysql://10.107.120.235:3306/SOCCERSTAT", "jdbc:mysql:dbserver").option("dbtable", "Player").option("user", "root").option("password", "mysecretpw").load()
 
 # Displays the content of the DataFrame to stdout
 df.show()

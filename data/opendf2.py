@@ -17,7 +17,7 @@ sc = SQLContext(spark)
 
 # The following creates a DataFrame based on the content of a database table
 df = SQLContext.read.format("jdbc").options(
-    url="jdbc:mysql://10.107.120.235:3306/SOCCERSTAT",
+    url="10.107.120.235:3306/SOCCERSTAT",
     driver = "com.mysql.jdbc.Driver",
     dbtable = "Player",
     user="root",
@@ -28,4 +28,3 @@ df.show()
 
 # Print the schema in a tree format
 df.printSchema()
-soccer_df.printSchema()
