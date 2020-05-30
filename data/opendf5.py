@@ -24,6 +24,8 @@ df = spark.read\
   .option("password", "pysecretpw")\
   .load()
 
+# dfRates = sqlContext.read.format("jdbc").options(url="jdbc:mysql://:3306/<DB_NAME>", driver = "com.mysql.jdbc.Driver", dbtable = "Rating", user="<DB_USER>", password="<DB_PASS>").load()
+# https://github.com/GoogleCloudPlatform/spark-recommendation-engine/issues/9
 # Displays the content of the DataFrame to stdout
 df.show()
 
