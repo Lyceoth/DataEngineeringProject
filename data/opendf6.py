@@ -17,7 +17,7 @@ sc = SQLContext(spark)
 
 # The following creates a DataFrame based on the content of a database table
 sql="""select * from Player where id>100"""
-jdbcDF = spark.read.format("jdbc").option("jdbc:mysql://10.107.120.235:3306/SOCCERSTAT", "jdbc:mysql:dbserver").option("dbtable",  s"( $sql ) t").option("user", "root").option("password", "mysecretpw").load()
+jdbcDF = sc.read.format("jdbc").option("jdbc:mysql://10.107.120.235:3306/SOCCERSTAT", "jdbc:mysql:dbserver").option("dbtable",  s"( $sql ) t").option("user", "root").option("password", "mysecretpw").load()
 # Displays the content of the DataFrame to stdout
 df.show()
 

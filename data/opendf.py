@@ -35,7 +35,7 @@ jdbc_url = "jdbc:mysql://{0}:{1}/{2}?user={3}&password={4}".format(hostname,jdbc
 
 # The following creates a DataFrame based on the content of a JSON file
 query = "(select * from Player)"
-df = SQLContext.read.format("jdbc").options(driver = "com.mysql.jdbc.Driver",url=jdbc_url, dbtable=query ).load()
+df = sc.read.format("jdbc").options(driver = "com.mysql.jdbc.Driver",url=jdbc_url, dbtable=query ).load()
 
 # Script Vergleich:
 #jdbcDF = spark.read.format("jdbc") \
