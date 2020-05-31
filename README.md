@@ -6,13 +6,11 @@ Gruppen-Repo als Laborbericht für den 1. Block aus der Vorlesung W3M20018.1 Dat
 
 Gruppenmitglieder:
 
-Markus Roselt - MarkRoseHN 
+Markus Roselt - MarkRoseHN
 Alexander Froese - A-Xander
 Matthias Wannenwetsch - matthias-wa
 Tobias Sattler - topedi94 
 Lars Nebenführ - Lyceoth
-
-
 
 Initial Concept:
 Der Data Lake enthält Fußball Rohdaten, die nach Bearbeitung im Database Server gespeichert werden.
