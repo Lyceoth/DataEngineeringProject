@@ -21,14 +21,16 @@
 	kubectl apply -f 04-app-deployment-service-ingress.yaml		# necessary
 8. Scaling microservice orchestration
 	kubectl scale deployment memcache-deployment --replicas=2	# optional, adds additional memcache
-	kubectl scale deployment my-super-app-deployment --replicas=2	# optional
+	kubectl scale deployment my-super-app-deployment --replicas=2	# optional, adds additional app deployment
 9. Checking microservice orchestration
 	watch kubectl get all						# optional, check
 	watch kubectl get ingress -o wide				# optional, check
 10. Using the app
-	minikube ip							# necessary, to get the ip of minikube (10.0.2.15)
-	curl http://`minikube ip`/person/7491				# necessary, enter minikube ip instead of placeholder
+	minikube ip							# optional, to get the ip of minikube (10.0.2.15)
+	curl http://`minikube ip`/person/9915				# optional, enter minikube ip instead of placeholder
+	curl http://`minikube ip`/match/9915				# optional, enter minikube ip instead of placeholder
 11. Deleting the app or parts of it
+	minikube delete							# optional
 	kubectl delete deployment/memcache-deployment			# optional
 	kubectl delete deployment/my-soccer-app-deployment		# optional
 	kubectl delete deployment/mysql-deployment			# optional
