@@ -46,7 +46,7 @@ async function getFromCache(key) {
 }
 
 // Person DB Request
-async function getFromDatabase(userid) {
+async function getPlayerFromDatabase(userid) {
    let query = 'SELECT * from Player WHERE id = "' + userid + '" LIMIT 1';
    let session = await mysqlx.getSession(dbConfig);
 
@@ -63,7 +63,7 @@ async function getFromDatabase(userid) {
 }
 
 // Match DB Request
-async function getFromDatabase(matchid) {
+async function getMatchFromDatabase(matchid) {
    let query = 'SELECT * from `Match` WHERE id = "' + matchid + '" LIMIT 1';
    let session = await mysqlx.getSession(dbConfig);
 
@@ -265,7 +265,7 @@ app.getAsync("/match/:id", async function (request, response) {
       send_match(response, cachedata, "Cache Hit");
    } else {
       console.log(`Cache miss for key=${key}, querying database`);
-      let data = await getFromDatabase(matchid);
+      let data = await getMatchFromDatabase(matchid);
       if (data) {
          console.log(`Got data=${data}, storing in cache`);
          if (memcached) await memcached.set(key, data, 30 /* seconds */);
@@ -287,7 +287,7 @@ app.getAsync("/person/:id", async function (request, response) {
       send_player(response, cachedata, "Cache Hit");
    } else {
       console.log(`Cache miss for key=${key}, querying database`);
-      let data = await getFromDatabase(userid);
+      let data = await getPlayerFromDatabase(userid);
       if (data) {
          console.log(`Got data=${data}, storing in cache`);
          if (memcached) await memcached.set(key, data, 30 /* seconds */);
