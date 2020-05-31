@@ -130,7 +130,7 @@ function send_match(response, data, cache_msg) {
             transform: translateY(0.1em);
         }
         #data {
-            width: 20em;
+            width: 25em;
             margin:auto;
             text-align:left;
         }
@@ -157,7 +157,6 @@ function send_match(response, data, cache_msg) {
         <li>${data[9]}</li>
         <li>${data[10]}</li>
         <br>
-        <li>Total Data: ${data}</li>
     </ul>
     <a class="button" href="https://10.0.2.15/person/${data[0]}" role="button">Show Player</a>
     <a class="button" href="https://10.0.2.15/match/${data[0]}" role="button">Show Match</a>  
@@ -217,7 +216,7 @@ function send_player(response, data, cache_msg) {
             transform: translateY(0.1em);
         }
         #data {
-            width: 20em;
+            width: 25em;
             margin:auto;
             text-align:left;
         }
@@ -240,7 +239,6 @@ function send_player(response, data, cache_msg) {
         <li>HEIGHT: ${data[5]}</li>
         <li>WEIGHT: ${data[6]}</li>
         <br>
-        <li>Total Data: ${data}</li>
     </ul>
     <a class="button" href="https://10.0.2.15/person/${data[0]}" role="button">Show Player</a>
     <a class="button" href="https://10.0.2.15/match/${data[0]}" role="button">Show Match</a>   
@@ -250,7 +248,7 @@ function send_player(response, data, cache_msg) {
 }
 
 app.get("/", async function (request, response) {
-   response.writeHead(302, { Location: "person/7518" });
+   response.writeHead(302, { Location: "person/9915" });
    response.end();
 });
 
