@@ -155,7 +155,7 @@ function send_match(response, data, cache_msg) {
         <li>Season: ${data[3]}</li>
         <li>Stage: ${data[4]}</li>
         <li>Date: ${data[5]}</li>
-        <li>MATCH API ID${data[6]}</li>
+        <li>MATCH API ID: ${data[6]}</li>
         <br>
     </ul>
     <a class="button" href="https://10.0.2.15/person/${data[0]}" role="button">Show Player</a>
