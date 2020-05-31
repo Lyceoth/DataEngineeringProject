@@ -80,6 +80,11 @@ async function getMatchFromDatabase(matchid) {
 }
 
 function send_match(response, data, cache_msg) {
+   if (data.length <1) {
+   pathnr = 8124;
+   } else {
+      pathnr = data[0];
+   }
    response.send(
       `<!DOCTYPE html>
    <head>
@@ -159,14 +164,19 @@ function send_match(response, data, cache_msg) {
         <br>
         <li>Total Data: ${data}</li>
     </ul>
-    <a class="button" href="https://10.0.2.15/person/${data[0]}" role="button">Show Player</a>
-    <a class="button" href="https://10.0.2.15/match/${data[0]}" role="button">Show Match</a>   
+    <a class="button" href="https://10.0.2.15/person/${pathnr}" role="button">Show Player</a>
+    <a class="button" href="https://10.0.2.15/match/${pathnr}" role="button">Show Match</a>  
    </body>
    </html>`
    );
 }
 
 function send_player(response, data, cache_msg) {
+      if (data.length <1) {
+   pathnr = 8124;
+   } else {
+      pathnr = data[0];
+   }
    response.send(
       `<!DOCTYPE html>
    <head>
@@ -242,8 +252,8 @@ function send_player(response, data, cache_msg) {
         <br>
         <li>Total Data: ${data}</li>
     </ul>
-    <a class="button" href="https://10.0.2.15/person/${data[0]}" role="button">Show Player</a>
-    <a class="button" href="https://10.0.2.15/match/${data[0]}" role="button">Show Match</a>   
+    <a class="button" href="https://10.0.2.15/person/${pathnr}" role="button">Show Player</a>
+    <a class="button" href="https://10.0.2.15/match/${pathnr}" role="button">Show Match</a>   
    </body>
    </html>`
    );
