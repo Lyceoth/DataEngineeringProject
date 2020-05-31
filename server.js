@@ -6,37 +6,37 @@ const app = addAsync(express());
 const mysqlx = require("@mysql/xdevapi");
 const MemcachePlus = require("memcache-plus");
 
-//Connect to the memcached instances
+// Connect to the memcached instances
 let memcached = null;
 let memcachedServers = [];
 
 const dbConfig = {
    user: "root",
    password: "mysecretpw",
-   host: "my-soccerapp-mysql-service", //changed
+   host: "my-soccerapp-mysql-service",
    port: 33060,
-   schema: "SOCCERSTAT", //changed
+   schema: "SOCCERSTAT",
 };
 
 async function getMemcachedServersFromDns() {
    let queryResult = await dns.lookup("my-memcached-service", { all: true });
    let servers = queryResult.map((el) => el.address + ":11211");
 
-   //Only create a new object if the server list has changed
+   // Only create a new object if the server list has changed
    if (memcachedServers.sort().toString() !== servers.sort().toString()) {
       console.log("Updated memcached server list to ", servers);
       memcachedServers = servers;
-      //Disconnect an existing client
+      // Disconnect an existing client
       if (memcached) await memcached.disconnect();
       memcached = new MemcachePlus(memcachedServers);
    }
 }
 
-//Initially try to connect to the memcached servers, then each 5s update the list
+// Initially try to connect to the memcached servers, then each 5s update the list
 getMemcachedServersFromDns();
 setInterval(() => getMemcachedServersFromDns(), 5000);
 
-//Get data from cache if a cache exists yet 															
+// Get data from cache if a cache exists yet 															
 async function getFromCache(key) {
    if (!memcached) {
       console.log(`No memcached instance available, memcachedServers = ${memcachedServers}`);
@@ -47,11 +47,13 @@ async function getFromCache(key) {
 
 // Person DB Request
 async function getPlayerFromDatabase(userid) {
+   // SQL query
    let query = 'SELECT * from Player WHERE id = "' + userid + '" LIMIT 1';
    let session = await mysqlx.getSession(dbConfig);
 
    console.log("Executing query " + query);
    let res = await session.sql(query).execute();
+   // Get all data
    let row = res.fetchAll();
 
    if (row) {
@@ -64,11 +66,13 @@ async function getPlayerFromDatabase(userid) {
 
 // Match DB Request
 async function getMatchFromDatabase(matchid) {
+   // SQL query
    let query = 'SELECT * from `Match` WHERE id = "' + matchid + '" LIMIT 1';
    let session = await mysqlx.getSession(dbConfig);
 
    console.log("Executing query " + query);
    let res = await session.sql(query).execute();
+   // Get all data
    let row = res.fetchAll();
 
    if (row) {
