@@ -6,7 +6,6 @@ Command 'mysql' not found, but can be installed with:
 apt install mysql-client-core-5.7   
 apt install mariadb-client-core-10.1
 
-root@bigdata:~# ^C
 root@bigdata:~# apt install mysql-client-core-5.7
 Reading package lists... Done
 Building dependency tree       
