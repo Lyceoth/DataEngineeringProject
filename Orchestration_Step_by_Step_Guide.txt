@@ -10,7 +10,6 @@
 	sudo minikube start --driver=none --memory 4096 --cpus 4	# necessary
 	kubectl version							# optional, check
 	kubectl get nodes -o wide					# optional, check
-	eval $(minikube docker-env) 					# optional, if possible (did not worked always)
 7. Starting the microservice orchestration
 	minikube addons enable ingress					# necessary
 	eval $(minikube docker-env)					# optional, if possible (did not worked always)
@@ -30,7 +29,6 @@
 	curl http://`minikube ip`/person/9915				# optional, enter minikube ip instead of placeholder
 	curl http://`minikube ip`/match/9915				# optional, enter minikube ip instead of placeholder
 11. Deleting the app or parts of it
-	minikube delete							# optional
 	kubectl delete deployment/memcache-deployment			# optional
 	kubectl delete deployment/my-soccer-app-deployment		# optional
 	kubectl delete deployment/mysql-deployment			# optional
@@ -38,4 +36,5 @@
 	kubectl delete svc/my-memcached-service				# optional
 	kubectl delete svc/my-app-mysql-service				# optional
 	kubectl delete ingress/my-super-app-ingress			# optional
+	minikube delete							# optional
 	
