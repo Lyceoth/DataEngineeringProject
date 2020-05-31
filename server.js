@@ -36,7 +36,7 @@ async function getMemcachedServersFromDns() {
 getMemcachedServersFromDns();
 setInterval(() => getMemcachedServersFromDns(), 5000);
 
-//Get data from cache if a cache exists yet 																	// to be changed
+//Get data from cache if a cache exists yet 															
 async function getFromCache(key) {
    if (!memcached) {
       console.log(`No memcached instance available, memcachedServers = ${memcachedServers}`);
@@ -145,17 +145,13 @@ function send_match(response, data, cache_msg) {
         <li>Cache Status: ${cache_msg}</li>
         <br>
         <li>Match Stats</li>
-        <li>id: ${data[0]}</li>
-        <li>country_id: ${data[1]}</li>
-        <li>league_id: ${data[2]}</li>
-        <li>season: ${data[3]}</li>
-        <li>stage: ${data[4]}</li>
-        <li>${data[5]}</li>
-        <li>${data[6]}</li>
-        <li>${data[7]}</li>
-        <li>${data[8]}</li>
-        <li>${data[9]}</li>
-        <li>${data[10]}</li>
+        <li>ID: ${data[0]}</li>
+        <li>Country ID: ${data[1]}</li>
+        <li>League ID: ${data[2]}</li>
+        <li>Season: ${data[3]}</li>
+        <li>Stage: ${data[4]}</li>
+        <li>Date: ${data[5]}</li>
+        <li>MATCH API ID${data[6]}</li>
         <br>
     </ul>
     <a class="button" href="https://10.0.2.15/person/${data[0]}" role="button">Show Player</a>
