@@ -15,7 +15,7 @@
 	eval $(minikube docker-env)					# optional, if possible (did not worked always)
 	docker build -t my-soccer-web-app .				# necessary
 	kubectl apply -f 01-mysql-deployment.yaml			# necessary
-	kubectl apply -f 02-k8s-mysql-service.yaml			# necessary
+	kubectl apply -f 02-mysql-service.yaml				# necessary
 	kubectl apply -f 03-memcached-deployment-and-service.yaml	# necessary
 	kubectl apply -f 04-app-deployment-service-ingress.yaml		# necessary
 8. Scaling microservice orchestration
