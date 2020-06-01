@@ -1,0 +1,40 @@
+1. Open Virtual Machine (bigdata.ova)
+2. Change User to bigdata (pw: bigdata)
+3. Create new directory named soccerapp at home
+4. Pull all files from git to soccerapp directory
+5. Open MATE terminal and enter following commands
+6. Starting the kubernetes minikube cluster
+	sudo bash 							# necessary
+	cd soccerapp							# necessary
+	minikube delete/minikube stop					# optional, in case if any minikube is already running
+	sudo minikube start --driver=none --memory 4096 --cpus 4	# necessary
+	kubectl version							# optional, check
+	kubectl get nodes -o wide					# optional, check
+7. Starting the microservice orchestration
+	minikube addons enable ingress					# necessary
+	eval $(minikube docker-env)					# optional, if possible (did not worked always)
+	docker build -t my-soccer-web-app .				# necessary
+	kubectl apply -f 01-mysql-deployment.yaml			# necessary
+	kubectl apply -f 02-mysql-service.yaml				# necessary
+	kubectl apply -f 03-memcached-deployment-and-service.yaml	# necessary
+	kubectl apply -f 04-app-deployment-service-ingress.yaml		# necessary
+8. Scaling microservice orchestration
+	kubectl scale deployment memcache-deployment --replicas=2	# optional, adds additional memcache
+	kubectl scale deployment my-super-app-deployment --replicas=2	# optional, adds additional app deployment
+9. Checking microservice orchestration
+	watch kubectl get all						# optional, check
+	watch kubectl get ingress -o wide				# optional, check
+10. Using the app
+	minikube ip							# optional, to get the ip of minikube (10.0.2.15)
+	curl http://`minikube ip`/person/9915				# optional, enter minikube ip instead of placeholder
+	curl http://`minikube ip`/match/9915				# optional, enter minikube ip instead of placeholder
+11. Deleting the app or parts of it
+	kubectl delete deployment/memcache-deployment			# optional
+	kubectl delete deployment/my-soccer-app-deployment		# optional
+	kubectl delete deployment/mysql-deployment			# optional
+	kubectl delete svc/my-soccer-app-service			# optional
+	kubectl delete svc/my-memcached-service				# optional
+	kubectl delete svc/my-app-mysql-service				# optional
+	kubectl delete ingress/my-super-app-ingress			# optional
+	minikube delete							# optional
+	
