@@ -19,7 +19,7 @@ Bei jeder Anfrage zu einem Spieler wird diese gezählt und dadurch der beliebtes
 (siehe PPT Folie 2)  
   
 Concept for Single Data Source:  
-Da nur eine Datenquelle verfügbar ist und diese Daten bereits in Datenbank Format vorliegen, sind Data Lake und Database Server in unserem Beispiel ein und dasselbe.  
+Da nur eine Datenquelle verfügbar ist und diese Daten bereits in einem Datenbank Format vorliegen, sind Data Lake und Database Server in unserem Beispiel ein und dasselbe.  
 Die Informationen zu den Spielern (Größe und Gewicht) werden aus dem Database Server (Tabelle Spieler) herausgezogen und verarbeitet. Der ermittelte Wert (Bsp.: BMI) wird zurückgespeichert in die Tabelle und ist sodann als zusätzliche Information verfügbar.  
 Da diese Anwendung keine Speed Layer Funktionalitäten benötigt, haben wir uns für die Kappa Architektur entschieden.  
 Die Möglichkeit zur Bestimmung des beliebtesten Spielers bleibt bestehen (siehe Simulation "autorequester.py).  
